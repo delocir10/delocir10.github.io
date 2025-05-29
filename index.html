@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoDrone - Mapeamento Aéreo para Legalização de Terrenos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .map-container {
+            height: 500px;
+            width: 100%;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header/Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-drone-alt text-green-600 text-3xl mr-2"></i>
+                <h1 class="text-xl font-bold text-gray-800">Geo<span class="text-green-600">Drone</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#servicos" class="text-gray-600 hover:text-green-600 font-medium">Serviços</a>
+                <a href="#como-funciona" class="text-gray-600 hover:text-green-600 font-medium">Como Funciona</a>
+                <a href="#beneficios" class="text-gray-600 hover:text-green-600 font-medium">Benefícios</a>
+                <a href="#contato" class="text-gray-600 hover:text-green-600 font-medium">Contato</a>
+            </nav>
+            <button class="md:hidden text-gray-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div class="hidden md:block">
+                <button 
+                    onclick="window.open('https://wa.me/message/NGZZD2UJCULWF1', '_blank')"
+                    class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition duration-300">
+                    Solicitar Orçamento
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20 md:py-32">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Legalização de Terrenos com <span class="text-green-400">Tecnologia de Drones</span></h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Mapeamento aéreo preciso para regularização fundiária, georreferenciamento e documentação de imóveis rurais e urbanos.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button 
+                    onclick="window.open('https://wa.me/message/NGZZD2UJCULWF1', '_blank')"
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition duration-300">
+                    Solicitar Análise Gratuita
+                </button>
+                <button 
+                    onclick="window.open('https://www.youtube.com/watch?v=nU0HhRPynNw', '_blank')"
+                    class="bg-white hover:bg-gray-100 text-green-700 px-8 py-4 rounded-full text-lg font-semibold transition duration-300">
+                    <i class="fas fa-play mr-2"></i> Ver Vídeo Explicativo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Nossos <span class="text-green-600">Serviços</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Utilizamos drones de última geração para fornecer dados precisos e confiáveis para a legalização de sua propriedade.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 transition duration-300 border border-gray-100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-map-marked-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Georreferenciamento</h3>
+                    <p class="text-gray-600 mb-4">Mapeamento preciso com coordenadas geográficas para atender às exigências do INCRA e cartórios.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Atendimento às normas do CAR</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Relatórios técnicos completos</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Compatível com SIGEF</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 transition duration-300 border border-gray-100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-file-contract text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Regularização Fundiária</h3>
+                    <p class="text-gray-600 mb-4">Documentação completa para legalização de terrenos urbanos e rurais com imagens aéreas de alta resolução.</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Memorial descritivo</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Plantas e croquis</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Acompanhamento processual</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-lg p-8 transition duration-300 border border-gray-100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-ruler-combined text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Topografia com Drone</h3>
+                    <p class="text-gray-600 mb-4">Levantamento topográfico preciso com curvas de nível e modelo digital de terreno (MDT).</p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Precisão centimétrica</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Compatível com AutoCAD</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Modelos 3D do terreno</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="como-funciona" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Como <span class="text-green-600">Funciona</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nosso processo simplificado garante agilidade e precisão na regularização do seu terreno.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-green-600 font-bold text-xl">1</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Solicitação</h3>
+                    <p class="text-gray-600">Você entra em contato e fornece os dados básicos do terreno.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-green-600 font-bold text-xl">2</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Mapeamento</h3>
+                    <p class="text-gray-600">Nossa equipe realiza o voo com drone para captura das imagens.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-green-600 font-bold text-xl">3</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Processamento</h3>
+                    <p class="text-gray-600">Criamos os mapas, relatórios e documentos necessários.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div class="mx-auto w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <span class="text-green-600 font-bold text-xl">4</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Entrega</h3>
+                    <p class="text-gray-600">Você recebe toda a documentação pronta para registro.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Tecnologia de Ponta para Resultados Precisos</h3>
+                        <p class="text-gray-600 mb-6">Utilizamos drones equipados com câmeras multiespectrais e RTK para garantir precisão centimétrica nos levantamentos, atendendo a todas as exigências legais para regularização de terrenos.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Precisão</h4>
+                                    <p class="text-gray-600">Erro máximo de 5cm com tecnologia RTK</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Agilidade</h4>
+                                    <p class="text-gray-600">Processo até 70% mais rápido que métodos tradicionais</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">Economia</h4>
+                                    <p class="text-gray-600">Custos até 50% menores que topografia convencional</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="map-container">
+                            <!-- This would be replaced with an actual map component -->
+                            <div class="h-full w-full bg-gray-200 flex items-center justify-center">
+                                <div class="text-center p-8">
+                                    <i class="fas fa-map-marked-alt text-5xl text-gray-400 mb-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-700">Mapa Interativo do Terreno</h4>
+                                    <p class="text-gray-500 mt-2">Aqui seria exibido o mapa gerado pelo drone com todas as medições e demarcações</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="beneficios" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Vantagens do <span class="text-green-600">Mapeamento com Drone</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Descubra por que a tecnologia de drones revolucionou a regularização de terrenos.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Benefit 1 -->
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Rapidez</h3>
+                    <p class="text-gray-600">O mapeamento com drone é realizado em até 80% menos tempo que os métodos tradicionais, acelerando todo o processo de regularização.</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Economia</h3>
+                    <p class="text-gray-600">Redução significativa de custos com equipe em campo e equipamentos, tornando a regularização acessível a mais proprietários.</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-bullseye text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Precisão</h3>
+                    <p class="text-gray-600">Tecnologia RTK e PPK garantem precisão centimétrica, eliminando erros humanos e fornecendo dados confiáveis para os órgãos reguladores.</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Segurança</h3>
+                    <p class="text-gray-600">Redução de riscos ao evitar deslocamentos em áreas perigosas ou de difícil acesso, mantendo a equipe segura durante os levantamentos.</p>
+                </div>
+                
+                <!-- Benefit 5 -->
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Dados Ricos</h3>
+                    <p class="text-gray-600">Geração de ortofotos, modelos digitais de terreno e superfície, curvas de nível e muito mais em um único levantamento.</p>
+                </div>
+                
+                <!-- Benefit 6 -->
+                <div class="bg-gray-50 rounded-xl p-8 border border-gray-100">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-file-alt text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Documentação Completa</h3>
+                    <p class="text-gray-600">Entrega de todos os documentos necessários para a regularização, incluindo ART, memorial descritivo e plantas georreferenciadas.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-green-600 rounded-xl overflow-hidden">
+                <div class="md:flex items-center">
+                    <div class="md:w-1/2 p-8 md:p-12 text-white">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Precisa regularizar seu terreno?</h3>
+                        <p class="mb-6 text-green-100">Nossa equipe está pronta para ajudar você a resolver todas as questões documentais do seu imóvel com tecnologia de ponta.</p>
+                        <button 
+                            onclick="window.open('https://wa.me/message/NGZZD2UJCULWF1', '_blank')"
+                            class="bg-white text-green-600 hover:bg-gray-100 px-8 py-3 rounded-full font-semibold transition duration-300">
+                            Fale com um Especialista
+                        </button>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80" alt="Drone em operação" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">O que nossos <span class="text-green-600">clientes</span> dizem</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Depoimentos de proprietários que regularizaram seus terrenos com nossa ajuda.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Ana Carolina</h4>
+                            <p class="text-sm text-gray-500">Proprietária Rural - MG</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Consegui regularizar minha fazenda de 50 hectares em tempo recorde. O mapeamento com drone foi incrivelmente preciso e muito mais barato do que orçamentos anteriores com topógrafos."</p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Roberto Almeida</h4>
+                            <p class="text-sm text-gray-500">Loteador - SP</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Regularizamos um loteamento inteiro com a GeoDrone. A equipe foi extremamente profissional e os documentos foram aceitos pelo cartório sem nenhuma exigência adicional. Recomendo!"</p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white rounded-xl shadow-md p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Mariana Santos</h4>
+                            <p class="text-sm text-gray-500">Herdeira - RJ</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"Estávamos com um problema familiar sobre os limites de um terreno herdado. O mapeamento com drone resolveu a questão de forma definitiva, com imagens tão claras que não deixaram dúvidas."</p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Entre em <span class="text-green-600">Contato</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Solicite um orçamento ou tire suas dúvidas sobre regularização de terrenos com nossa equipe.</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Envie sua mensagem</h3>
+                        <form class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Nome Completo</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300" placeholder="Seu nome">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 font-medium mb-2">E-mail</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300" placeholder="seu@email.com">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-gray-700 font-medium mb-2">Telefone</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300" placeholder="(00) 00000-0000">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Mensagem</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300" placeholder="Descreva seu terreno e necessidades..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-4 rounded-lg font-semibold transition duration-300">
+                                Enviar Mensagem
+                            </button>
+                        </form>
+                    </div>
+                    <div class="md:w-1/2 bg-green-600 text-white p-8 md:p-12">
+                        <h3 class="text-2xl font-bold mb-6">Nossos contatos</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Endereço</h4>
+                                    <p class="text-green-100">Rua Dois, 1124 - Pelotas/RS</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Telefone</h4>
+                                    <p class="text-green-100">(53) 99109-8069</p>
+                                    <p class="text-green-100">(11) 99120-2076</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">E-mail</h4>
+                                    <p class="text-green-100">contato@djn.com.br</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Horário de Atendimento</h4>
+                                    <p class="text-green-100">Segunda a Sexta: 8h às 18h</p>
+                                    <p class="text-green-100">Sábado: 8h às 12h</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-semibold mb-4">Siga-nos nas redes sociais</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center transition duration-300">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Perguntas <span class="text-green-600">Frequentes</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tire suas dúvidas sobre mapeamento com drones para regularização de terrenos.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <!-- FAQ Item 1 -->
+                    <div class="border-b border-gray-200">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 hover:bg-gray-50 transition duration-300">
+                            <h3 class="text-lg font-semibold text-gray-800 text-left">Quais documentos são necessários para contratar o serviço?</h3>
+                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">Basicamente você precisará fornecer: cópia do documento de identificação do proprietário, comprovante de endereço e qualquer documentação existente sobre o terreno (escritura, contrato de compra e venda, etc.). Caso não possua nenhum documento, podemos orientá-lo sobre como proceder.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="border-b border-gray-200">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 hover:bg-gray-50 transition duration-300">
+                            <h3 class="text-lg font-semibold text-gray-800 text-left">Qual a precisão do mapeamento com drone?</h3>
+                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">Nossos drones equipados com tecnologia RTK alcançam precisão absoluta de 2-5cm no plano horizontal e 3-7cm no plano vertical, atendendo e superando as exigências do INCRA para georreferenciamento de imóveis rurais (Norma Técnica de Georreferenciamento - NTG).</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="border-b border-gray-200">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 hover:bg-gray-50 transition duration-300">
+                            <h3 class="text-lg font-semibold text-gray-800 text-left">Quanto tempo demora o processo completo?</h3>
+                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">O tempo varia conforme a complexidade do terreno e a documentação existente. Em média, o mapeamento em campo leva 1 dia, o processamento dos dados 3-5 dias úteis, e a elaboração da documentação técnica mais 5-7 dias. O processo de registro no cartório depende da localidade, mas costuma levar entre 15-30 dias.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="border-b border-gray-200">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 hover:bg-gray-50 transition duration-300">
+                            <h3 class="text-lg font-semibold text-gray-800 text-left">O serviço é válido em todo o Brasil?</h3>
+                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">Sim, atendemos em todo o território nacional. Temos equipes em todas as regiões do país e parceiros locais para garantir a cobertura nacional. Para áreas remotas ou de difícil acesso, podem haver custos adicionais de deslocamento.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div class="border-b border-gray-200">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 hover:bg-gray-50 transition duration-300">
+                            <h3 class="text-lg font-semibold text-gray-800 text-left">Posso parcelar o serviço?</h3>
+                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">Sim, oferecemos opções de parcelamento em até 12x no cartão de crédito ou em até 6x via boleto bancário. Para imóveis rurais acima de 50 hectares ou projetos especiais, podemos elaborar um plano de pagamento personalizado.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 6 -->
+                    <div class="border-b border-gray-200">
+                        <button class="faq-toggle w-full flex justify-between items-center p-6 hover:bg-gray-50 transition duration-300">
+                            <h3 class="text-lg font-semibold text-gray-800 text-left">Vocês acompanham o processo no cartório?</h3>
+                            <i class="fas fa-chevron-down text-green-600 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content px-6 pb-6 hidden">
+                            <p class="text-gray-600">Sim, oferecemos o serviço completo que inclui a entrega da documentação técnica e o acompanhamento do processo de registro no cartório, com representação por nosso escritório de advocacia parceiro. Este serviço adicional tem custo à parte e pode ser contratado conforme sua necessidade.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <p class="text-gray-600 mb-6">Ainda tem dúvidas? Nossa equipe está pronta para ajudar.</p>
+                    <button 
+                        onclick="window.open('https://wa.me/message/NGZZD2UJCULWF1', '_blank')"
+                        class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300">
+                        <i class="fas fa-whatsapp mr-2"></i> Fale pelo WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Area Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Área de <span class="text-green-600">Cobertura</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Atendemos em todo o território nacional com equipes especializadas em cada região.</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">Onde atuamos</h3>
+                        <p class="text-gray-600 mb-6">Com equipes em todas as regiões do Brasil, garantimos atendimento rápido e eficiente em qualquer localidade, desde grandes centros urbanos até áreas rurais remotas.</p>
+                        
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-map-pin text-green-600 mr-2"></i> Região Sudeste
+                                </h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> São Paulo</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Rio de Janeiro</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Minas Gerais</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Espírito Santo</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-map-pin text-green-600 mr-2"></i> Região Sul
+                                </h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Paraná</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Santa Catarina</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Rio Grande do Sul</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-map-pin text-green-600 mr-2"></i> Região Nordeste
+                                </h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Bahia</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Pernambuco</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Ceará</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Outros estados</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                    <i class="fas fa-map-pin text-green-600 mr-2"></i> Outras Regiões
+                                </h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Goiás</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Mato Grosso</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Amazonas</li>
+                                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Demais estados</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                        <div class="map-container">
+                            <!-- This would be replaced with an actual map component -->
+                            <div class="h-full w-full bg-gray-200 flex items-center justify-center">
+                                <div class="text-center p-8">
+                                    <i class="fas fa-map text-5xl text-gray-400 mb-4"></i>
+                                    <h4 class="text-xl font-semibold text-gray-700">Mapa de Cobertura Nacional</h4>
+                                    <p class="text-gray-500 mt-2">Aqui seria exibido um mapa do Brasil mostrando nossa área de cobertura</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-green-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Pronto para regularizar seu terreno?</h2>
+            <p class="text-xl mb-10 max-w-3xl mx-auto text-green-100">Solicite agora mesmo um orçamento sem compromisso e descubra como podemos ajudar.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button 
+                    onclick="window.open('https://wa.me/message/NGZZD2UJCULWF1', '_blank')"
+                    class="bg-white hover:bg-gray-100 text-green-700 px-8 py-4 rounded-full text-lg font-semibold transition duration-300">
+                    <i class="fas fa-phone-alt mr-2"></i> Falar com Consultor
+                </button>
+                <button class="bg-green-700 hover:bg-green-800 text-white px-8 py-4 rounded-full text-lg font-semibold transition duration-300">
+                    <i class="fas fa-envelope mr-2"></i> Enviar E-mail
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-drone-alt text-green-400 text-3xl mr-2"></i>
+                        <h3 class="text-xl font-bold">Geo<span class="text-green-400">Drone</span></h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Tecnologia de ponta para regularização fundiária e mapeamento aéreo com drones em todo o Brasil.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Serviços</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Georreferenciamento</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Regularização Fundiária</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Topografia com Drone</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Levantamento para CAR</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Demarcação de Terrenos</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Sobre Nós</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Portfólio</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Depoimentos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-green-400 transition duration-300">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contato</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-green-400"></i>
+                            <span>Rua dois, 124 - Pelotas/RS</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-green-400"></i>
+                            <span>(53) 99109-8069<br>(53) 99120-2076</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-green-400"></i>
+                            <span>contato@djn.com.br</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock mt-1 mr-3 text-green-400"></i>
+                            <span>Seg-Sex: 8h às 18h<br>Sáb: 8h às 12h</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="md:flex md:items-center md:justify-between">
+                    <p class="text-gray-400 text-sm">© 2023 GeoDrone. Todos os direitos reservados.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-green-400 text-sm transition duration-300">Termos de Serviço</a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 text-sm transition duration-300">Política de Privacidade</a>
+                        <a href="#" class="text-gray-400 hover:text-green-400 text-sm transition duration-300">Cookies</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="#" class="w-16 h-16 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg transition duration-300 floating">
+            <i class="fab fa-whatsapp text-white text-2xl"></i>
+        </a>
+    </div>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+        });
+        
+        // Mobile Menu Toggle (would need additional implementation)
+        document.querySelector('.md\\:hidden').addEventListener('click', () => {
+            // This would toggle a mobile menu
+            console.log('Mobile menu toggle clicked');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
